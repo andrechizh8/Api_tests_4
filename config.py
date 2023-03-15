@@ -16,6 +16,3 @@ class Hosts:
         }[env]
 
 
-print(Hosts("prod").demoqa)
-
-

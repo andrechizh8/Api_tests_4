@@ -17,20 +17,20 @@ def test_login(browser_auth):
         browser_auth.element(".account").should(have.exact_text("andrechizh.ru@yandex.ru"))
 
 
-def test_add_product_to_cart(browser_auth, demoshop):
+def test_add_product_to_cart(browser_auth,demoshop):
     browser.open("")
 
     with allure.step("Check successful add to cart"):
-        demoshop.post("addproducttocart/details/45/1")
-        browser.open("cart")
-        browser.element("[class='product-name']").should(have.exact_text("Fiction"))
+        demoshop.add_to_cart()
+        browser.element(".ico-cart").click()
+        browser.element("[class='product-name']").should(have.text("Laptop"))
 
 
 def test_delete_product_from_cart(browser_auth, demoshop):
     browser.open("")
 
     with allure.step("Check successful delete from cart"):
-        demoshop.post("addproducttocart/details/45/1")
+        demoshop.add_to_cart()
         browser.element("[class='ico-cart']").click()
         browser.element("[name='removefromcart']").click()
         browser.element("[name='updatecart']").click()
@@ -41,7 +41,7 @@ def test_add_product_to_wishlist(browser_auth, demoshop):
     browser.open("")
 
     with allure.step("Check successful add to wishlist"):
-        demoshop.post("addproducttocart/details/53/2")
+        demoshop.add_to_wishlist()
         browser.open("wishlist")
         browser.element("[class='product']").should(have.exact_text("3rd Album"))
 
@@ -50,7 +50,7 @@ def test_delete_product_from_wishlist(browser_auth, demoshop):
     browser.open("")
 
     with allure.step("Check successful delete from wishlist"):
-        demoshop.post("addproducttocart/details/53/2")
+        demoshop.add_to_wishlist()
         browser.element("[class='ico-wishlist']").click()
         browser.element("[name='removefromcart']").click()
         browser.element("[name='updatecart']").click()

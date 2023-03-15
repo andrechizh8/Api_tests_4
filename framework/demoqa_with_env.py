@@ -36,3 +36,11 @@ class DemoQaWithEnv:
             response = self.demoqa.post('/addproducttocart/catalog/31/1/1', cookies=cookie)
         return response
 
+    def add_to_wishlist(self, **kwargs):
+        cookie = kwargs.get("cookies", None)
+        count = kwargs.get("count", 1)
+        response = None
+        for i in range(0, count):
+            response = self.demoqa.post('addproducttocart/details/53/2', cookies=cookie)
+        return response
+
